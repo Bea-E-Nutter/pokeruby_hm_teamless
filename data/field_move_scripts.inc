@@ -1,11 +1,9 @@
 S_CuttableTree:: @ 81B0DCC
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, CannotUseCut
-	checkpartymove MOVE_CUT
-	compare VAR_RESULT, 6
-	goto_if_eq CannotUseCut
-	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick 0, VAR_RESULT
+	goto_if_unset FLAG_RECEIVED_HM01, CannotUseCut
+	setfieldeffectargument 0, 0
+	bufferpartymonnick 0, 0
 	buffermovename 1, MOVE_CUT
 	msgbox UseCutPromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -58,11 +56,9 @@ CannotUseCutText: @ 81B0E8E
 S_BreakableRock:: @ 81B0EB7
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, CannotUseRockSmash
-	checkpartymove MOVE_ROCK_SMASH
-	compare VAR_RESULT, 6
-	goto_if_eq CannotUseRockSmash
-	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick 0, VAR_RESULT
+	goto_if_unset FLAG_RECEIVED_HM06, CannotUseRockSmash
+	setfieldeffectargument 0, 0
+	bufferpartymonnick 0, 0
 	buffermovename 1, MOVE_ROCK_SMASH
 	msgbox UseRockSmashPromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -124,11 +120,9 @@ CannotUseRockSmashText: @ 81B0F90
 S_PushableBoulder:: @ 81B0FCB
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, CannotUseStrength
+	goto_if_unset FLAG_RECEIVED_HM04, CannotUseStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, AlreadyUsedStrength
-	checkpartymove 70
-	compare VAR_RESULT, 6
-	goto_if_eq CannotUseStrength
-	setfieldeffectargument 0, VAR_RESULT
+	setfieldeffectargument 0, 0
 	msgbox UseStrengthPromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Strength_ChoseNo
@@ -186,11 +180,9 @@ AlreadyUsedStrengthText: @ 81B1127
 
 S_UseWaterfall:: @ 81B115A
 	lockall
-	checkpartymove MOVE_WATERFALL
-	compare VAR_RESULT, 6
-	goto_if_eq Waterfall_NoMonKnows
-	bufferpartymonnick 0, VAR_RESULT
-	setfieldeffectargument 0, VAR_RESULT
+	goto_if_unset FLAG_RECEIVED_HM07, Waterfall_NoMonKnows
+	bufferpartymonnick 0, 0
+	setfieldeffectargument 0, 0
 	msgbox UseWaterfallPromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Waterfall_Done
@@ -219,11 +211,9 @@ UsedWaterfallText: @ 81B120D
 
 UseDiveScript:: @ 81B1220
 	lockall
-	checkpartymove MOVE_DIVE
-	compare VAR_RESULT, 6
-	goto_if_eq CannotUseDive
-	bufferpartymonnick 0, VAR_RESULT
-	setfieldeffectargument 0, VAR_RESULT
+	goto_if_unset FLAG_RECEIVED_HM08, CannotUseDive
+	bufferpartymonnick 0, 0
+	setfieldeffectargument 0, 0
 	setfieldeffectargument 1, 1
 	msgbox UseDivePromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -242,11 +232,9 @@ Dive_Done: @ 81B1267
 
 S_UseDiveUnderwater:: @ 81B1269
 	lockall
-	checkpartymove MOVE_DIVE
-	compare VAR_RESULT, 6
-	goto_if_eq UnderwaterCannotUseDive
-	bufferpartymonnick 0, VAR_RESULT
-	setfieldeffectargument 0, VAR_RESULT
+	goto_if_unset FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_HM08, UnderwaterCannotUseDive
+	bufferpartymonnick 0, 0
+	setfieldeffectargument 0, 0
 	setfieldeffectargument 1, 1
 	msgbox UnderwaterUseDivePromptText, MSGBOX_YESNO
 	compare VAR_RESULT, NO
